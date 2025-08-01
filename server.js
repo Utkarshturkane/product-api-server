@@ -1,12 +1,12 @@
 // // server.js
-// import express from 'express';
-// import cors from 'cors';
-// import fetch from 'node-fetch';
+import express from 'express';
+import cors from 'cors';
+import fetch from 'node-fetch';
 
-// const app = express();
-// const PORT = process.env.PORT || 5000;
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-// app.use(cors());
+app.use(cors());
 
 // // Proxy API route
 // app.get('/api/products', async (req, res) => {
