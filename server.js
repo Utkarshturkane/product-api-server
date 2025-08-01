@@ -26,14 +26,17 @@ app.get('/api/products', async (req, res) => {
   try {
     const response = await fetch('https://fakestoreapi.com/products', {
       headers: {
-        'User-Agent': 'Mozilla/5.0', // mimic browser
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
         'Accept': 'application/json'
       }
     });
 
-    // Check if the response is actually JSON
-    const contentType = response.headers.get("content-type");
-    if (!response.ok || !contentType.includes("application/json")) {
+    const contentType = response.headers.get("content-type") || "";
+    const isJson = contentType.includes("application/json");
+
+    if (!response.ok || !isJson) {
+      const text = await response.text(); // debug actual content
+      console.error('Non-JSON response received:\n', text.slice(0, 300));
       throw new Error("Unexpected response format");
     }
 
@@ -44,6 +47,7 @@ app.get('/api/products', async (req, res) => {
     res.status(500).json({ error: "Failed to fetch products" });
   }
 });
+
 
 
 app.listen(PORT, () => {
