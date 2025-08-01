@@ -20,9 +20,6 @@ app.use(cors());
 //   }
 // });
 
-// app.listen(PORT, () => {
-//   console.log(`✅ Server running on http://localhost:${PORT}`);
-// });
 
 
 app.get('/api/products', async (req, res) => {
@@ -46,4 +43,9 @@ app.get('/api/products', async (req, res) => {
     console.error("Fetch error:", err.message);
     res.status(500).json({ error: "Failed to fetch products" });
   }
+});
+
+
+app.listen(PORT, () => {
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });
